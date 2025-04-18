@@ -1,7 +1,10 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlaneMovement : MonoBehaviour
 {
+    public GameManager gameManager;
+
     [Header("Speed And Roational Values")]
 
     public float velocity;
@@ -11,6 +14,10 @@ public class PlaneMovement : MonoBehaviour
 
     public ParticleSystem burstFX;
 
+    private void Start()
+    {
+        gameManager = FindObjectOfType<GameManager>();  
+    }
     private void Update()
     {
         float horizontal = Input.GetAxis("Horizontal"); // smoothened movement
@@ -23,7 +30,14 @@ public class PlaneMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Misile"))
         {
             burstFX.Play();
-            // stop the game
+            gameManager.isGameOver = true;
+            StartCoroutine(SetTimeScaleToZero(0.5f));
         }
+    }
+
+    private IEnumerator SetTimeScaleToZero(float time)
+    {
+        yield return new WaitForSeconds(time);
+        Time.timeScale = 0f;
     }
 }
