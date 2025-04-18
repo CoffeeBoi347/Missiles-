@@ -11,6 +11,12 @@ public class Misile : MonoBehaviour
     public float timeLimit;
     public bool hasReachedTimeLimit = false;
     public float timer = 0f;
+    public bool hasCollided = false;
+
+    private void Start()
+    {
+        hasCollided = false;
+    }
 
     private void Update()
     {
@@ -40,6 +46,7 @@ public class Misile : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Misile"))
         {
+            hasCollided = true;
             Debug.Log("DESTROYING GAME OBJECT...!");
             Destroy(gameObject);
         }

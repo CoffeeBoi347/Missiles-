@@ -14,6 +14,10 @@ public class PlaneMovement : MonoBehaviour
 
     public ParticleSystem burstFX;
 
+    [Header("Other Booleans")]
+
+    public bool hasCollided = false;
+
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();  
@@ -29,6 +33,7 @@ public class PlaneMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Misile"))
         {
+            hasCollided = true;
             burstFX.Play();
             gameManager.isGameOver = true;
             StartCoroutine(SetTimeScaleToZero(0.5f));
