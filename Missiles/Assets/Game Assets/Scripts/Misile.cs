@@ -11,8 +11,11 @@ public class Misile : MonoBehaviour
     public float timeLimit;
     public bool hasReachedTimeLimit = false;
     public float timer = 0f;
+
     private void Update()
     {
+        target = FindObjectOfType<PlaneMovement>().gameObject;
+
         Vector2 direction = target.transform.position - transform.position;
         rb.velocity = transform.up * velocity * Time.deltaTime;
         float rotateAmount = Vector3.Cross(direction, transform.up).z;
