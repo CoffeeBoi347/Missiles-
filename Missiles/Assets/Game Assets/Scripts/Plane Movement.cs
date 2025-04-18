@@ -15,7 +15,7 @@ public class PlaneMovement : MonoBehaviour
     {
         float horizontal = Input.GetAxis("Horizontal"); // smoothened movement
         transform.position += transform.up * velocity * Time.deltaTime;
-        transform.Rotate(0f, 0f, -horizontal * quaternion * Time.deltaTime);
+        transform.Rotate(0f, 0f, -horizontal * quaternion * 0.5f * Time.deltaTime);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
